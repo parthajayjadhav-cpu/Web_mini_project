@@ -1,0 +1,104 @@
+/* StatsModal — My Stats display per Doc 3 spec. */
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  padding: 16px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--text-1);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.statValueAmber {
+  color: var(--amber);
+}
+
+.statValueTeal {
+  color: var(--teal);
+}
+
+.statValueGreen {
+  color: var(--green);
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* Points per hour chart */
+.chartSection {
+  margin-top: 24px;
+}
+
+.chartTitle {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 12px;
+}
+
+.chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  height: 100px;
+  padding: 12px;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+}
+
+.bar {
+  flex: 1;
+  background: var(--teal);
+  border-radius: 4px 4px 0 0;
+  min-height: 4px;
+  transition: height 300ms ease;
+  position: relative;
+}
+
+.barValue {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-2);
+  padding-bottom: 4px;
+  white-space: nowrap;
+}
+
+.chartLabels {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.chartLabel {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-3);
+}

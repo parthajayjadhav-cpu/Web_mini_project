@@ -1,0 +1,44 @@
+/* Tokyo Midnight Arcade — design tokens (per Doc 3). No purple. */
+:root {
+  /* Surfaces */
+  --bg-void: #060608;
+  --bg-surface: #0c0c12;
+  --bg-raised: #121219;
+  --bg-hover: #18181f;
+
+  /* Borders */
+  --border-dim: #1c1c28;
+  --border-mid: #2a2a3d;
+  --border-hot: #f59e0b;
+
+  /* Accents */
+  --amber: #f59e0b;
+  --amber-bright: #fbbf24;
+  --amber-dim: rgba(245, 158, 11, 0.15);
+  --amber-glow: 0 0 24px rgba(245, 158, 11, 0.35);
+
+  --teal: #14b8a6;
+  --teal-dim: rgba(20, 184, 166, 0.12);
+  --teal-glow: 0 0 20px rgba(20, 184, 166, 0.3);
+
+  --red: #f43f5e;
+  --red-dim: rgba(244, 63, 94, 0.12);
+
+  --green: #22c55e;
+  --green-dim: rgba(34, 197, 94, 0.12);
+
+  --yellow: #eab308;
+
+  --silver: #9ca3af;
+  --bronze: #b45309;
+
+  /* Text */
+  --text-1: #f5f5f0;
+  --text-2: #a0a0b8;
+  --text-3: #44445a;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-ui: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+}

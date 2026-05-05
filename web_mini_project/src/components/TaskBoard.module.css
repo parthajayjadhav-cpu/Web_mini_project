@@ -1,0 +1,450 @@
+/* TaskBoard — Kanban-style columns per Doc 3 spec. */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+}
+
+/* Header with add form and filters */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+/* Add task inline form */
+.addForm {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.addInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 10px 14px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--text-1);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 150ms ease;
+}
+
+.addInput::placeholder {
+  color: var(--text-3);
+}
+
+.addInput:focus {
+  border-color: var(--amber);
+}
+
+.difficultySelect,
+.assigneeSelect,
+.filterSelect,
+.sortSelect {
+  padding: 10px 12px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-1);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+  transition: border-color 150ms ease;
+}
+
+.difficultySelect:focus,
+.assigneeSelect:focus,
+.filterSelect:focus,
+.sortSelect:focus {
+  border-color: var(--amber);
+}
+
+.addBtn {
+  padding: 10px 18px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--bg-void);
+  background: var(--amber);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: box-shadow 150ms ease, transform 100ms ease;
+}
+
+.addBtn:hover {
+  box-shadow: var(--amber-glow);
+}
+
+.addBtn:active {
+  transform: scale(0.97);
+}
+
+.addBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Filter/sort controls */
+.controls {
+  display: flex;
+  gap: 10px;
+}
+
+/* Kanban columns */
+.columnsWrapper {
+  flex: 1;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 4px;
+}
+
+.columns {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  min-width: max-content;
+}
+
+.column {
+  flex: 1;
+  min-width: 280px;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-dim);
+}
+
+.columnTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.columnDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.columnDotTodo {
+  background: var(--text-3);
+}
+
+.columnDotProgress {
+  background: var(--amber);
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.columnDotDone {
+  background: var(--green);
+  box-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.columnCount {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+  background: var(--bg-raised);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.columnBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Drop zone styling */
+.columnBodyDragOver {
+  background: var(--amber-dim);
+}
+
+/* Empty column state */
+.emptyColumn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-3);
+  border: 1px dashed var(--border-dim);
+  border-radius: 6px;
+}
+
+/* ───────────────────────────────────────────────────────────────────────────
+   TASK CARD
+────────────────────────────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  padding: 12px 14px;
+  padding-left: 18px;
+  cursor: grab;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.card:hover {
+  border-color: var(--border-mid);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card:active {
+  cursor: grabbing;
+}
+
+.cardDragging {
+  opacity: 0.5;
+  transform: scale(0.98);
+}
+
+/* Left accent border */
+.cardAccent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 6px 0 0 6px;
+}
+
+.cardAccentEasy {
+  background: var(--green);
+}
+
+.cardAccentMedium {
+  background: var(--amber);
+}
+
+.cardAccentHard {
+  background: var(--red);
+}
+
+/* Urgent indicator */
+.cardUrgent {
+  border-color: var(--red);
+}
+
+.cardUrgent::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 6px;
+  border: 1px solid var(--red);
+  animation: urgentPulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes urgentPulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.cardTitle {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-1);
+  line-height: 1.4;
+  flex: 1;
+}
+
+.cardActions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 150ms ease;
+}
+
+.card:hover .cardActions {
+  opacity: 1;
+}
+
+.actionBtn {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 150ms ease, color 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.actionBtn:hover {
+  background: var(--bg-hover);
+  color: var(--text-1);
+}
+
+.actionBtn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.actionBtnActive {
+  color: var(--red);
+}
+
+/* Card meta row */
+.cardMeta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.difficultyBadge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.difficultyEasy {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.difficultyMedium {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+
+.difficultyHard {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.pointsBadge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-2);
+}
+
+.assigneeBadge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.assigneeAvatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--bg-void);
+}
+
+.assigneeName {
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--text-2);
+}
+
+/* Notes section */
+.cardNotes {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-dim);
+}
+
+.noteInput {
+  width: 100%;
+  padding: 8px 10px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--text-1);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 4px;
+  outline: none;
+  resize: none;
+  min-height: 60px;
+}
+
+.noteInput::placeholder {
+  color: var(--text-3);
+}
+
+.noteInput:focus {
+  border-color: var(--amber);
+}
+
+.noteDisplay {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+/* Done checkmark overlay */
+.cardDone {
+  opacity: 0.6;
+}
+
+.cardDone .cardTitle {
+  text-decoration: line-through;
+  color: var(--text-2);
+}

@@ -1,0 +1,273 @@
+/* Sidebar — 220px fixed width per Doc 3 spec. */
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  display: none;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-dim);
+  padding: 24px 16px;
+  gap: 28px;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    display: flex;
+  }
+}
+
+/* Logo section */
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoSquares {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+
+.logoSquare {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--amber);
+  border-radius: 3px;
+}
+
+.logoSquare:first-child {
+  top: 0;
+  left: 0;
+}
+
+.logoSquare:last-child {
+  bottom: 0;
+  right: 0;
+  border-color: var(--teal);
+}
+
+.logoText {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.06em;
+  color: var(--text-1);
+}
+
+/* Room info block */
+.roomInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background: var(--bg-raised);
+  border-radius: 8px;
+  border: 1px solid var(--border-dim);
+}
+
+.roomLabel {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.roomCode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.code {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: var(--amber);
+}
+
+.copyBtn {
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  cursor: pointer;
+  transition: color 150ms ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyBtn:hover {
+  color: var(--amber);
+}
+
+.copyBtn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Members online */
+.members {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memberAvatars {
+  display: flex;
+  gap: -8px;
+}
+
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid var(--bg-surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--bg-void);
+  margin-left: -8px;
+}
+
+.avatar:first-child {
+  margin-left: 0;
+}
+
+.memberCount {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+/* Timer section */
+.timerSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.timerValue {
+  font-family: var(--font-display);
+  font-size: 48px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  transition: color 200ms ease;
+}
+
+.timerTeal {
+  color: var(--teal);
+}
+
+.timerAmber {
+  color: var(--amber);
+}
+
+.timerRed {
+  color: var(--red);
+}
+
+.progressBar {
+  height: 3px;
+  background: var(--bg-raised);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--teal);
+  transition: width 1s linear, background 200ms ease;
+}
+
+.progressFillAmber {
+  background: var(--amber);
+}
+
+.progressFillRed {
+  background: var(--red);
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-2);
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+  text-align: left;
+}
+
+.navLink:hover {
+  background: var(--bg-raised);
+  color: var(--text-1);
+}
+
+.navLinkActive {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+
+.navIcon {
+  width: 16px;
+  height: 16px;
+  opacity: 0.7;
+}
+
+.navLinkActive .navIcon {
+  opacity: 1;
+}
+
+/* Spacer to push invite button to bottom */
+.spacer {
+  flex: 1;
+}
+
+/* Invite button */
+.inviteBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-1);
+  background: var(--bg-raised);
+  border: 1px dashed var(--border-mid);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.inviteBtn:hover {
+  border-color: var(--amber);
+  border-style: solid;
+  color: var(--amber);
+}
+
+.inviteIcon {
+  width: 16px;
+  height: 16px;
+}

@@ -1,0 +1,156 @@
+/* Dashboard — 4-column grid layout per Doc 3 spec. */
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Custom crosshair cursor for dashboard */
+.container,
+.container * {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><line x1="6" y1="0" x2="6" y2="12" stroke="%23f59e0b" stroke-width="1"/><line x1="0" y1="6" x2="12" y2="6" stroke="%23f59e0b" stroke-width="1"/></svg>') 6 6, crosshair;
+}
+
+/* Main content area */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 24px;
+  gap: 24px;
+  overflow-x: hidden;
+}
+
+@media (min-width: 1200px) {
+  .main {
+    padding: 32px;
+    gap: 32px;
+  }
+}
+
+/* Content grid: Task board + right panels */
+.contentGrid {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 24px;
+  min-height: 0;
+}
+
+@media (min-width: 1024px) {
+  .contentGrid {
+    flex-direction: row;
+  }
+}
+
+/* Task board takes remaining space */
+.boardArea {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Right panels (leaderboard + activity feed) */
+.rightPanels {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .rightPanels {
+    width: 300px;
+    flex-shrink: 0;
+  }
+}
+
+@media (min-width: 1400px) {
+  .rightPanels {
+    width: 340px;
+  }
+}
+
+/* Loading state */
+.loadingContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border-dim);
+  border-top-color: var(--amber);
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loadingText {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 0.08em;
+}
+
+/* Error state */
+.errorContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px;
+}
+
+.errorText {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  color: var(--red);
+  text-align: center;
+}
+
+.errorBtn {
+  padding: 12px 24px;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-1);
+  background: var(--bg-raised);
+  border: 1px solid var(--border-dim);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 150ms ease;
+}
+
+.errorBtn:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* Mobile bottom nav spacer */
+.mobileNavSpacer {
+  display: none;
+  height: 72px;
+}
+
+@media (max-width: 767px) {
+  .mobileNavSpacer {
+    display: block;
+  }
+}

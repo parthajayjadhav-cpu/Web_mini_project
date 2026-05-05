@@ -1,0 +1,18 @@
+/* Custom 12px amber crosshair cursor — applied only on the dashboard. */
+.dashboardCursor,
+.dashboardCursor * {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><line x1='8' y1='2' x2='8' y2='14' stroke='%23f59e0b' stroke-width='1'/><line x1='2' y1='8' x2='14' y2='8' stroke='%23f59e0b' stroke-width='1'/></svg>")
+    8 8, crosshair;
+}
+
+/* Restore native cursor on inputs / actionable controls so typing UX stays normal. */
+.dashboardCursor input,
+.dashboardCursor textarea,
+.dashboardCursor select {
+  cursor: text;
+}
+.dashboardCursor button,
+.dashboardCursor [role='button'],
+.dashboardCursor a {
+  cursor: pointer;
+}

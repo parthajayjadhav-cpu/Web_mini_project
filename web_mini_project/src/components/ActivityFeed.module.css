@@ -1,0 +1,145 @@
+/* ActivityFeed — Live event log per Doc 3 spec. */
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-dim);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 200px;
+  max-height: 400px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-dim);
+  flex-shrink: 0;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 16px;
+  animation: slideIn 200ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Icon container */
+.iconWrap {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 12px;
+}
+
+.iconTaskDone {
+  background: var(--green-dim);
+  color: var(--green);
+}
+
+.iconTaskAdded {
+  background: var(--teal-dim);
+  color: var(--teal);
+}
+
+.iconUrgent {
+  background: var(--red-dim);
+  color: var(--red);
+}
+
+.iconStreak {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+
+.iconRankChange {
+  background: rgba(192, 192, 192, 0.12);
+  color: var(--silver);
+}
+
+.iconClutch {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+
+.iconDefault {
+  background: var(--bg-raised);
+  color: var(--text-3);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  min-width: 0;
+}
+
+.message {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-1);
+  line-height: 1.4;
+}
+
+.message strong {
+  font-weight: 500;
+  color: var(--text-1);
+}
+
+.message .highlight {
+  color: var(--amber);
+}
+
+.time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-3);
+  margin-top: 3px;
+}
+
+/* Empty state */
+.empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  color: var(--text-3);
+}
